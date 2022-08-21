@@ -138,7 +138,7 @@ export const TaskThree = () => {
                   backgroundColor: [
                     "teal",
                     "pink",
-                    "red",
+                    "crimson",
                     "indigo",
                     "seagreen",
                     "orange",
