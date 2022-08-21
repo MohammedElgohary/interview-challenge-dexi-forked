@@ -1,12 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Home, TaskOne, TaskTwo } from "../views";
+import { TaskOne, TaskTwo, TaskThree } from "../views";
 
 function router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-
       <Route
         path="/one"
         element={
@@ -17,6 +15,7 @@ function router() {
       />
 
       <Route path="/two" element={<TaskTwo />} />
+      <Route path="/three" element={<TaskThree />} />
     </Routes>
   );
 }

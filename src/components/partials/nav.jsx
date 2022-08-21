@@ -21,10 +21,6 @@ export const MainNav = () => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink to="/">Home</NavLink>
-          </NavItem>
-
-          <NavItem>
             <NavLink to="/one">Task One</NavLink>
           </NavItem>
 
