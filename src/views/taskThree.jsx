@@ -1,13 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Button, Spinner } from "reactstrap";
+import {
+  Alert,
+  Button,
+  Spinner,
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Card,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+} from "reactstrap";
+
 import {
   CustomButton,
   FlexRow,
   CustomSelect,
   FlexSpaceBetween,
 } from "../components";
+
 import axios from "axios";
 import { Doughnut, Line } from "react-chartjs-2";
+
+import classnames from "classnames";
 
 export const TaskThree = () => {
   /**
@@ -26,6 +44,11 @@ export const TaskThree = () => {
    */
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const [activeTab, setActiveTab] = useState("1");
+  const toggle = (tab) => {
+    if (activeTab !== tab) setActiveTab(tab);
+  };
 
   const getData = () => {
     /**
@@ -97,64 +120,89 @@ export const TaskThree = () => {
   ) : (
     data && (
       <div>
-        <div className="mt-5">
-          <h2>By Gander</h2>
-          <Doughnut
-            data={{
-              labels: ["Male", "Female"],
-              datasets: [
-                {
-                  data: [
-                    findCountByCondition((item) => item?.gender === "male"),
-                    findCountByCondition((item) => item?.gender === "female"),
-                  ],
-                  backgroundColor: ["teal", "pink"],
-                },
-              ],
-            }}
-          />
-        </div>
+        <h1 className="my-5">Graph By</h1>
+        <Nav tabs>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: activeTab === "1" })}
+              onClick={() => toggle("1")}
+            >
+              Gander
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: activeTab === "2" })}
+              onClick={() => toggle("2")}
+            >
+              Age
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: activeTab === "3" })}
+              onClick={() => toggle("3")}
+            >
+              Blood Group
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <TabContent activeTab={activeTab}>
+          <TabPane tabId="1" className="p-5">
+            <Doughnut
+              data={{
+                labels: ["Male", "Female"],
+                datasets: [
+                  {
+                    data: [
+                      findCountByCondition((item) => item?.gender === "male"),
+                      findCountByCondition((item) => item?.gender === "female"),
+                    ],
+                    backgroundColor: ["teal", "pink"],
+                  },
+                ],
+              }}
+            />
+          </TabPane>
+          <TabPane tabId="2" className="p-5">
+            <Line
+              data={{
+                labels: data?.users?.map((item) => item?.age),
+                datasets: [
+                  {
+                    data: data?.users?.map((item) => item?.age),
+                  },
+                ],
+              }}
+            />
+          </TabPane>
+          <TabPane tabId="3" className="p-5">
+            <Doughnut
+              data={{
+                labels: BloodGroupLabels,
+                datasets: [
+                  {
+                    data: BloodGroupLabels.map((bloodGroup) =>
+                      findCountByCondition(
+                        (item) => item?.bloodGroup === bloodGroup
+                      )
+                    ),
+                    backgroundColor: [
+                      "teal",
+                      "pink",
+                      "crimson",
+                      "indigo",
+                      "seagreen",
+                      "orange",
+                      "#555555",
+                    ],
+                  },
+                ],
+              }}
+            />
+          </TabPane>
+        </TabContent>
 
-        <div className="mt-5">
-          <h2>By Age</h2>
-          <Line
-            data={{
-              labels: data?.users?.map((item) => item?.age),
-              datasets: [
-                {
-                  data: data?.users?.map((item) => item?.age),
-                },
-              ],
-            }}
-          />
-        </div>
-
-        <div className="mt-5">
-          <h2>By Blood Group</h2>
-          <Doughnut
-            data={{
-              labels: BloodGroupLabels,
-              datasets: [
-                {
-                  data: BloodGroupLabels.map((bloodGroup) =>
-                    findCountByCondition(
-                      (item) => item?.bloodGroup === bloodGroup
-                    )
-                  ),
-                  backgroundColor: [
-                    "teal",
-                    "pink",
-                    "crimson",
-                    "indigo",
-                    "seagreen",
-                    "orange",
-                    "#555555",
-                  ],
-                },
-              ],
-            }}
-          />
-        </div>
         <FlexSpaceBetween>
           <FlexRow>
             <CustomButton
