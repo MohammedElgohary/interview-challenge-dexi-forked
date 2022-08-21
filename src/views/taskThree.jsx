@@ -72,6 +72,12 @@ export const TaskThree = () => {
     new Set(data?.users?.map((item) => item?.bloodGroup))
   );
 
+  console.log({
+    total: data?.total,
+    page,
+    loadMore: page * limit > data?.total,
+  });
+
   useEffect(() => {
     getData();
   }, [page, limit]);
@@ -153,11 +159,11 @@ export const TaskThree = () => {
           <FlexRow>
             <CustomButton
               onClick={() => {
-                if (page >= 1) {
+                if (page >= 1 && page * limit < data?.total) {
                   setPage(page + 1);
                 }
               }}
-              disabled={page >= data?.total}
+              disabled={page * limit >= data?.total}
             >
               Load More
             </CustomButton>

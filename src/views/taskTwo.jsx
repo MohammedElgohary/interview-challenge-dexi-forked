@@ -101,11 +101,11 @@ export const TaskTwo = () => {
           <FlexRow>
             <CustomButton
               onClick={() => {
-                if (page >= 1) {
+                if (page >= 1 && page * limit < data?.total) {
                   setPage(page + 1);
                 }
               }}
-              disabled={page >= data?.total}
+              disabled={page * limit >= data?.total}
             >
               Load More
             </CustomButton>
