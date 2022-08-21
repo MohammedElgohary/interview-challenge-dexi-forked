@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700&display=swap");
+* {
+  scroll-behavior: smooth;
+  font-family: "Tajawal", sans-serif;
+}
+
+.navbar-collapse a {
+  color: #555;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+tr {
+  vertical-align: middle;
+}/*# sourceMappingURL=index.css.map */
