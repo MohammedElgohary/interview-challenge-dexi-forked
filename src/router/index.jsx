@@ -1,10 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { TaskOne, TaskTwo, TaskThree } from "../views";
+import { TaskOne, TaskTwo, TaskThree, Home } from "../views";
 
 function router() {
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
+
       <Route
         path="/one"
         element={

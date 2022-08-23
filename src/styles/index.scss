@@ -16,3 +16,9 @@
 tr {
   vertical-align: middle;
 }
+
+.nav-item {
+  .nav-link {
+    cursor: pointer;
+  }
+}

@@ -119,8 +119,23 @@ export const TaskThree = () => {
     </Alert>
   ) : (
     data && (
-      <div>
-        <h1 className="my-5">Graph By</h1>
+      <div className="mb-5">
+        <div className="d-flex justify-content-between align-items-center">
+          <h1 className="my-5">Graph By</h1>
+          <div className="d-flex flex-column align-items-center">
+            <strong>
+              Viewed:{" "}
+              <span className="h5 text-danger">{data?.users?.length}</span>{" "}
+              users
+            </strong>
+
+            <strong>of</strong>
+
+            <strong>
+              Total: <span className="h5 text-danger">{data?.total}</span> users
+            </strong>
+          </div>
+        </div>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -207,17 +222,6 @@ export const TaskThree = () => {
           <FlexRow>
             <CustomButton
               onClick={() => {
-                if (page >= 1 && page * limit < data?.total) {
-                  setPage(page + 1);
-                }
-              }}
-              disabled={page * limit >= data?.total}
-            >
-              Load More
-            </CustomButton>
-
-            <CustomButton
-              onClick={() => {
                 if (page > 1) {
                   setPage(page - 1);
                 }
@@ -226,22 +230,36 @@ export const TaskThree = () => {
             >
               Load Less
             </CustomButton>
-          </FlexRow>
 
-          <CustomSelect
-            value={limit}
-            onChange={(e) => setLimit(e.target.value)}
-          >
-            {limitOptions.map((option) => (
-              <option
-                key={option}
-                value={option}
-                disabled={option > data?.total}
-              >
-                {option}
-              </option>
-            ))}
-          </CustomSelect>
+            <CustomButton
+              onClick={() => {
+                if (page >= 1 && page * limit < data?.total) {
+                  setPage(page + 1);
+                }
+              }}
+              disabled={page * limit >= data?.total}
+            >
+              Load More
+            </CustomButton>
+          </FlexRow>
+          <div className="d-flex align-items-center" style={{ gap: "15px" }}>
+            <div>View</div>
+            <CustomSelect
+              value={limit}
+              onChange={(e) => setLimit(e.target.value)}
+            >
+              {limitOptions.map((option) => (
+                <option
+                  key={option}
+                  value={option}
+                  disabled={option > data?.total}
+                >
+                  {option}
+                </option>
+              ))}
+            </CustomSelect>
+            <div>rows</div>
+          </div>
         </FlexSpaceBetween>
       </div>
     )

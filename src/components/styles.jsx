@@ -30,21 +30,25 @@ export const Email = styled("div")({
   color: "#555",
 });
 
-export const CustomButton = styled("button")({
-  backgroundColor: "#fff",
-  border: "1px solid #000",
-  borderRadius: "5px",
-  padding: "10px",
-  fontSize: "1rem",
-  fontWeight: "bold",
-  color: "#000",
-  cursor: "pointer",
-  transition: "all 0.3s",
-  "&:hover": {
-    backgroundColor: "#000",
-    color: "#fff",
+export const CustomButton = styled("button")(
+  {
+    borderRadius: "5px",
+    padding: "10px",
+    fontSize: "1rem",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "all 0.3s",
   },
-});
+  ({ disabled }) => ({
+    color: disabled ? "#777" : "#000",
+    backgroundColor: disabled ? "#ccc" : "#fff",
+    border: `1px solid ${disabled ? "#ccc" : "#000"}`,
+    "&:hover": {
+      backgroundColor: disabled ? "#ccc" : "#000",
+      color: disabled ? "#777" : "#fff",
+    },
+  })
+);
 
 export const FlexRow = styled("div")({
   display: "flex",

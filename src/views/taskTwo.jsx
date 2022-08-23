@@ -101,17 +101,6 @@ export const TaskTwo = () => {
           <FlexRow>
             <CustomButton
               onClick={() => {
-                if (page >= 1 && page * limit < data?.total) {
-                  setPage(page + 1);
-                }
-              }}
-              disabled={page * limit >= data?.total}
-            >
-              Load More
-            </CustomButton>
-
-            <CustomButton
-              onClick={() => {
                 if (page > 1) {
                   setPage(page - 1);
                 }
@@ -120,18 +109,33 @@ export const TaskTwo = () => {
             >
               Load Less
             </CustomButton>
+
+            <CustomButton
+              onClick={() => {
+                if (page >= 1 && page * limit < data?.total) {
+                  setPage(page + 1);
+                }
+              }}
+              disabled={page * limit >= data?.total}
+            >
+              Load More
+            </CustomButton>
           </FlexRow>
 
-          <CustomSelect
-            value={limit}
-            onChange={(e) => setLimit(e.target.value)}
-          >
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={15}>15</option>
-            <option value={20}>20</option>
-            <option value={25}>25</option>
-          </CustomSelect>
+          <div className="d-flex align-items-center" style={{ gap: "15px" }}>
+            <div>View</div>
+            <CustomSelect
+              value={limit}
+              onChange={(e) => setLimit(e.target.value)}
+            >
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={15}>15</option>
+              <option value={20}>20</option>
+              <option value={25}>25</option>
+            </CustomSelect>
+            <div>rows</div>
+          </div>
         </FlexSpaceBetween>
       </div>
     )
